@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Carousel from "../../../Components/Carousel";
 import CarouselItemJumbotron from "../../../Components/CarouselItemJumbotron";
-import MovieSectionHeader from "../../../Components/MovieSectionHeader";
 import { useGenreQuery, useNowPlayingQuery } from "../../../services/tmdbApi";
 import { getTmdbImageUrl } from "../../../utils/utilities";
 
 const NowPlayingMovies = () => {
     const { data, error, isLoading } = useNowPlayingQuery()
-    const { data: genre, error: errorGenre, isLoading: isLoadingGenre } = useGenreQuery()
+    const { data: genre } = useGenreQuery()
 
     const getGenres = (ids) => {
         return ((genre || {}).genres || []).filter(item => ids.includes(item.id)).map(item => item.name)

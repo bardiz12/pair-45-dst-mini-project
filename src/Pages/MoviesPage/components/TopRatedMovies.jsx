@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "../../../Components/Carousel";
 import CarouselItem from "../../../Components/CarouselItem";
 import MovieSectionHeader from "../../../Components/MovieSectionHeader";
-import { usePopularQuery, useTopRatedQuery } from "../../../services/tmdbApi";
+import { useTopRatedQuery } from "../../../services/tmdbApi";
 import { getTmdbImageUrl } from "../../../utils/utilities";
 
 const TopRatedMovies = () => {

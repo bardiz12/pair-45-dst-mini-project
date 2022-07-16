@@ -13,6 +13,7 @@ import LoginUserPage from './Pages/CreateUserPage/LoginUserPage';
 import ProtectedComponent from './Components/ProtectedComponent';
 import MoviesPage from './Pages/MoviesPage/MoviesPage';
 import MovieDetailPage from './Pages/MoviesPage/MovieDetailPage';
+import GuestComponent from './Components/GuestComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,13 +22,13 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="/" element={<ProfilesPage />} />
+            <Route path="/" element={<GuestComponent><ProfilesPage /></GuestComponent>} />
             <Route path="/movie">
               <Route path="/movie" element={<MoviesPage />} />
               <Route path="/movie/:id" element={<ProtectedComponent><MovieDetailPage /></ProtectedComponent>} />
             </Route>
           </Route>
-          <Route path="/auth" element={<AuthTemplatePage />}>
+          <Route path="/auth" element={<GuestComponent><AuthTemplatePage /></GuestComponent>}>
             <Route path="register" element={<CreateUserPage />} />
             <Route path="login" element={<LoginUserPage />} />
           </Route>

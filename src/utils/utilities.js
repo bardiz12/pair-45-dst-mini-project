@@ -7,7 +7,13 @@ export const convertFormToObject = (form) => {
     }, {});
 }
 
-export const getTmdbImageUrl = (path, size) => `https://image.tmdb.org/t/p/w${size}${path}`
+export const getTmdbImageUrl = (path, size) => {
+    if (path === undefined || path === null) {
+        return path
+    }
+
+    return path.slice(0, 5) === '/http' ? path.slice(1) : `https://image.tmdb.org/t/p/w${size}${path}`
+}
 
 export const getOffset = (elm) => {
     const rect = elm.getBoundingClientRect();

@@ -1,5 +1,3 @@
-import React from "react";
-
 const images = [
     require("../assets/profileImages/1.png"),
     require("../assets/profileImages/2.png"),

@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../../Components/Navbar';
 import userImage from '../../data/userImage';
 import UserBox from './Components/UserBox';
 import SvgAdd from '../../assets/button/add.svg';

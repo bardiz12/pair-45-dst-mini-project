@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import { Outlet, Route, Routes } from 'react-router-dom';
-import ProfilesPage from './Pages/ProfilesPage/ProfilesPage';
+import { Outlet } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 

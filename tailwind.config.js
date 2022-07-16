@@ -14,4 +14,9 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'lg:container',
+    'sm:container',
+    '3xl:container',
+  ]
 }

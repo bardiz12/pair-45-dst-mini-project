@@ -1,6 +1,6 @@
-import React, { Children, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { selectloggedInUser } from "../store/userStore";
 
 
@@ -9,7 +9,7 @@ const ProtectedComponent = ({ children }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        // console.log(loggedInUser)
+        console.log(loggedInUser)
         if (loggedInUser == null) {
             navigate('/')
         }

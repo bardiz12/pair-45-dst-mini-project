@@ -22,7 +22,7 @@ const CarouselItem = ({ carouselItem, currentIndex, index, innerRef, showSelecte
             </Link>
             <Link
                 to={carouselItem.link}
-                className={`flex justify-center items-center h-full w-full block absolute top-0 left-0 transition-opacity duration-300 ${currentIndex === index && showSelected ? 'opacity-100' : 'opacity-0'} hover:opacity-100 bg-netflix-dark/75 z-10`}
+                className={`flex justify-center items-center h-full w-full absolute top-0 left-0 transition-opacity duration-300 ${currentIndex === index && showSelected ? 'opacity-100' : 'opacity-0'} hover:opacity-100 bg-netflix-dark/75 z-10`}
             >
                 <h3 className="text-white m-auto text-xl">
                     {carouselItem.title}

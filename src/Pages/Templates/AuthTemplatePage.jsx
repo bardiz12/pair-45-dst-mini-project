@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import userImage from "../../data/userImage";

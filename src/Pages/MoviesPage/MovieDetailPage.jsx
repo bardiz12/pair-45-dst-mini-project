@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import Container from "../../Components/Container.jsx";
 import { useMovieByIdQuery } from "../../services/tmdbApi.js";
 import { getTmdbImageUrl } from "../../utils/utilities.js";
 import MovieDetailContent from "./components/MovieDetailContent.jsx";

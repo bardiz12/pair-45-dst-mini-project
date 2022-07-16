@@ -1,11 +1,8 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
-import { getOffset } from "../utils/utilities";
+import React, { createRef, useState } from "react";
 
 const Carousel = ({ carouselItems, ItemComponent, showSelected = false}) => {
 
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [nextEnabled, setNextEnabled] = useState(true)
-    const [prevEnabled, setPrevEnabled] = useState(true)
 
     const totalItems = carouselItems.length
 
@@ -29,13 +26,9 @@ const Carousel = ({ carouselItems, ItemComponent, showSelected = false}) => {
         goToItem(currentIndex >= totalItems - 1 ? 0 : currentIndex + 1);
     }
     const prevSlide = (e) => {
-        goToItem(currentIndex == 0 ? totalItems - 1 : currentIndex - 1);
+        goToItem(currentIndex === 0 ? totalItems - 1 : currentIndex - 1);
     }
 
-    // useEffect(() => {
-    //     setPrevEnabled(currentIndex > 0)
-    //     setNextEnabled(currentIndex <= totalItems - 1)
-    // }, [currentIndex, totalItems])
 
     return (
         <>
@@ -43,7 +36,6 @@ const Carousel = ({ carouselItems, ItemComponent, showSelected = false}) => {
                 <div className="relative overflow-hidden">
                     <div className="flex justify-between absolute top left w-full h-full">
                         <button
-                            disabled={!prevEnabled}
                             onClick={prevSlide}
                             className="hover:bg-netflix-dark/75 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
                         >
@@ -64,7 +56,6 @@ const Carousel = ({ carouselItems, ItemComponent, showSelected = false}) => {
                             <span className="sr-only">Prev</span>
                         </button>
                         <button
-                            disabled={!nextEnabled}
                             onClick={nextSlide}
                             className="hover:bg-netflix-dark/75 text-white w-10 h-full text-center opacity-75 hover:opacity-100 disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300"
                         >

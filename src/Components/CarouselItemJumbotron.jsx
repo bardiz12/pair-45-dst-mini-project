@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Badge from "./Badge"
 const CarouselItemJumbotron = ({ carouselItem, currentIndex, index, innerRef, showSelected, ...props }) => {
     return (
@@ -22,9 +23,9 @@ const CarouselItemJumbotron = ({ carouselItem, currentIndex, index, innerRef, sh
             >
 
             </div>
-            <div
-                href={carouselItem.link}
-                className={`flex h-full w-full block absolute top-0 left-0 transition-opacity duration-300 opacity-100 bg-netflix-dark/75 z-10`}
+            <Link
+                to={carouselItem.link}
+                className={`flex h-full w-full absolute top-0 left-0 transition-opacity duration-300 opacity-100 bg-netflix-dark/75 z-10`}
             >
                 <div className="hidden w-1/2 h-full md:flex bg-netflix-blue pl-16 items-center">
                     <div className="flex flex-col gap-2">
@@ -42,15 +43,16 @@ const CarouselItemJumbotron = ({ carouselItem, currentIndex, index, innerRef, sh
                 </div>
                 <div className="w-full md:w-1/2 h-full block bg-origin-padding bg-center bg-cover bg-no-repeat z-0"
                     style={{ backgroundImage: `url(${carouselItem.imageUrl || ''})` }}>
-                    
+
                     <div className="hidden md:flex w-full h-full  justify-start opacity-100">
                         <div className="w-32 h-full">
                             <div className="bg-gradient-to-r from-netflix-blue via-netflix-blue to-transparent h-full ">&nbsp;</div>
                         </div>
                     </div>
 
+
                 </div>
-            </div>
+            </Link>
         </div>
     )
 }
