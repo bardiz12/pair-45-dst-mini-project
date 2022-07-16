@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMovieByIdQuery } from "../../services/tmdbApi.js";
 import { getTmdbImageUrl } from "../../utils/utilities.js";
 import MovieDetailContent from "./components/MovieDetailContent.jsx";
 import PopularMovies from "./components/PopularMovies.jsx";
+import useTitle from "../../utils/useTitle"
 
 const MovieDetailPage = () => {
     const { id } = useParams()
     const { data: movie, error, isLoading } = useMovieByIdQuery({ id })
+
+    useTitle(movie ? movie.title : '')
     return (
         <>
             <div className="bg-netflix-dark text-white">

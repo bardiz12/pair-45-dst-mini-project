@@ -20,7 +20,7 @@ const storeLoggedInUserToLocalStorage = (user) => {
 
 const userStore = createSlice({
     name: 'userStore',
-    initialState: initialState,
+    initialState,
     reducers: {
         setLoggedInUser(state, action) {
             const { user } = action.payload

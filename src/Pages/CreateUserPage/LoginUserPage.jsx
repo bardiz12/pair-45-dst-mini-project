@@ -5,8 +5,12 @@ import RedButton from "../../Components/Buttons/RedButton";
 import Input from "../../Components/Input";
 import { changeImageChoosen, selectUserList, setLoggedInUser } from "../../store/userStore";
 import { convertFormToObject } from "../../utils/utilities";
+import useTitle from "../../utils/useTitle"
 
 const LoginUserPage = () => {
+
+    useTitle('Login')
+
     const { state } = useLocation();
     const [username, setUsername] = useState((state || {}).username || '')
     const dispatcher = useDispatch()
