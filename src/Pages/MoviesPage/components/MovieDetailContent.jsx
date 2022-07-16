@@ -98,7 +98,7 @@ const MovieDetailContent = ({ movie }) => {
                     </div>
                     <div className="w-full md:w-3/4">
                         <MovieSectionHeader title="Reviews" />
-                        <div className="mt-2 bg-netflix-blue w-full p-4 flex flex-col gap-2">
+                        <div className="mt-2 bg-netflix-dark w-full p-4 flex flex-col gap-2">
                             {
                                 movie.reviews.results
                                     .map(review => ({ ...review, profile_image_url: getTmdbImageUrl(review.author_details.avatar_path, 185) }))

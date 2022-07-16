@@ -16,7 +16,7 @@ const ProfilesPage = function () {
                 <h1 className='text-5xl'>Who's Watching ?</h1>
                 <div className='flex w-full justify-center gap-4 items-center'>
                     {
-                        userList.map(user => <UserBox user={{...user, image: userImage.getImage(user.image)}} onClick={(e) => navigate('auth/login', {
+                        userList.map(user => <UserBox key={user.username} user={{...user, image: userImage.getImage(user.image)}} onClick={(e) => navigate('auth/login', {
                             state: { username: user.username, image_id : user.image}
                         })} />)
                     }

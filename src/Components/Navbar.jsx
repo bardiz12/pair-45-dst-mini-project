@@ -42,9 +42,11 @@ const Navbar = function () {
                             </Link>
                         </div>
                         <div className="mr-2 -my-2 md:hidden">
-                            <div className="hover:cursor-pointer" onClick={dropDownNavbarHandler}>
-                                <img id="userProfile" src={loggedInUser.image} className="w-8 h-8" alt="user profile" />
-                            </div>
+                            {
+                                isLoggedIn && (<div className="hover:cursor-pointer" onClick={dropDownNavbarHandler}>
+                                    <img id="userProfile" src={loggedInUser.image} className="w-8 h-8" alt="user profile" />
+                                </div>)
+                            }
                         </div>
                         {
                             isLoggedIn && <>
@@ -72,20 +74,22 @@ const Navbar = function () {
                         }
                     </div>
                 </div>
-                <div ref={refDropDown} className={`z-10 w-44 bg-netflix-dark border-t-2 border-netflix-blue rounded divide-y divide-gray-600 shadow block shadow-neutral-800 ${!showDropdown && 'hidden'}`} data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style={{ position: 'absolute', inset: '0px auto auto auto', right: '350px', margin: '0px', transform: 'translate3d(327px, 70px, 0px)' }}>
-                    <div className="py-3 px-4 text-sm text-white">
-                        <div>{loggedInUser.username}</div>
-                        <div className="font-medium truncate"></div>
-                    </div>
-                    {/* <ul className="py-1 text-sm text-white dark:text-white" aria-labelledby="dropdownInformationButton">
+                {
+                    isLoggedIn && (<div ref={refDropDown} className={`z-10 w-44 bg-netflix-dark border-t-2 border-netflix-blue rounded divide-y divide-gray-600 shadow block shadow-neutral-800 ${!showDropdown && 'hidden'}`} data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style={{ position: 'absolute', inset: '0px auto auto auto', right: '350px', margin: '0px', transform: 'translate3d(327px, 70px, 0px)' }}>
+                        <div className="py-3 px-4 text-sm text-white">
+                            <div>{loggedInUser.username}</div>
+                            <div className="font-medium truncate"></div>
+                        </div>
+                        {/* <ul className="py-1 text-sm text-white dark:text-white" aria-labelledby="dropdownInformationButton">
                         <li>
                             <Link to="/logout" className="block py-2 px-4 hover:bg-netflix-blue dark:hover:text-white">Earnings</Link>
                         </li>
                     </ul> */}
-                    <div className="py-1">
-                        <Link to="/logout" className="block py-2 px-4 text-sm text-white hover:bg-netflix-blue dark:text-gray-200 dark:hover:text-white">Log out</Link>
-                    </div>
-                </div>
+                        <div className="py-1">
+                            <Link to="/logout" className="block py-2 px-4 text-sm text-white hover:bg-netflix-blue dark:text-gray-200 dark:hover:text-white">Log out</Link>
+                        </div>
+                    </div>)
+                }
 
             </div>
         </>

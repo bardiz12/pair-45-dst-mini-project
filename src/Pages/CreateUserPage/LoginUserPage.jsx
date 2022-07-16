@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import RedButton from "../../Components/Buttons/RedButton";
 import Input from "../../Components/Input";
-import { changeImageChoosen, setLoggedInUser } from "../../store/userStore";
+import { changeImageChoosen, selectUserList, setLoggedInUser } from "../../store/userStore";
 import { convertFormToObject } from "../../utils/utilities";
 
 const LoginUserPage = () => {
@@ -14,11 +14,23 @@ const LoginUserPage = () => {
 
     dispatcher(changeImageChoosen({ id: (state || {}).image_id || 1 }))
 
+    const userList = useSelector(selectUserList)
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        dispatcher(setLoggedInUser(convertFormToObject(e.target)))
-        navigate('/movie')
+        const payload = convertFormToObject(e.target)
+
+        const { username, password } = payload
+        const selectedUser = userList.filter((item) => {
+            return item.username === username && item.password === password
+        })[0] || null;
+
+        if (selectedUser === null) {
+            return alert("Invalid credentials!")
+        } else {
+            dispatcher(setLoggedInUser({ user: selectedUser }))
+            navigate('/movie')
+        }
     }
 
 

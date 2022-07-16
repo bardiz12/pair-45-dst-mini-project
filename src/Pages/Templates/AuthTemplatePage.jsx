@@ -18,7 +18,7 @@ const AuthTemplatePage = () => {
                             <div className="bg-gradient-to-r from-transparent via-black to-black h-full ">&nbsp;</div>
                         </div>
                     </div>
-                    <div className="hidden md:block fixed h-full top-0 right-0 left-0 bg-netflix-dark opacity-40" style={{width:"calc(50% - 5rem)"}}>
+                    <div className="hidden md:block fixed h-full top-0 right-0 left-0 bg-netflix-dark opacity-40" style={{ width: "calc(50% - 5rem)" }}>
                         &nbsp;
                     </div>
                 </div>
@@ -26,11 +26,6 @@ const AuthTemplatePage = () => {
                     <Outlet />
                 </div>
             </div>
-            {/* <aside className="fixed top-0 right-0 w-8/12 h-screen">
-                <div className="w-8/12 flex items-center justify-center">
-                    <div>tes</div>
-                </div>
-            </aside> */}
         </div>
     )
 }

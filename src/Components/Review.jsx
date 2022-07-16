@@ -3,7 +3,7 @@ import RatingStar from "./RatingStar";
 
 const Review = ({ review }) => {
     return (
-        <div className="flex flex-col w-full bg-netflix-dark p-8">
+        <div className="flex flex-col w-full bg-netflix-blue p-8">
             <div className="flex gap-4">
                 <img
                     src={review.profile_image_url}

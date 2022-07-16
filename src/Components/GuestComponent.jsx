@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { selectloggedInUser } from "../store/userStore";
 
 
-const GuestComponent = () => {
+const GuestComponent = ({ children }) => {
     const loggedInUser = useSelector(selectloggedInUser)
     const navigate = useNavigate()
 
@@ -14,9 +14,7 @@ const GuestComponent = () => {
         }
     }, [loggedInUser, navigate])
 
-    return (<>
-        <Outlet />
-    </>)
+    return children
 }
 
 export default GuestComponent
