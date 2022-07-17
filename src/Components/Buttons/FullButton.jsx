@@ -1,6 +1,6 @@
 import React from "react";
 
-const RedButton = ({ children, size, type, ...otherProps }) => {
+const FullButton = ({ children, size, type, className, ...otherProps }) => {
 
     let padding
     if (size === 'medium') {
@@ -13,10 +13,10 @@ const RedButton = ({ children, size, type, ...otherProps }) => {
 
 
     return (
-        <button type={type || 'button'} className={`w-full bg-netflix-red hover:bg-red-800 disabled:bg-red-400 disabled:cursor-not-allowed ${padding}`} {...otherProps}>
+        <button type={type || 'button'} className={`w-full px-5 text-black font-bold bg-white hover:bg-gray-200 ${padding} ${className}`} {...otherProps}>
             {children}
         </button>
     )
 }
 
-export default RedButton
+export default FullButton

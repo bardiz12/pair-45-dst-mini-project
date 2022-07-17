@@ -51,9 +51,26 @@ export const tmdbApi = createApi({
                     })
                 }
             },
-
+        }),
+        searchMovie: builder.query({
+            query: ({ term, page = 1 }) => {
+                return {
+                    url: `/search/movie`,
+                    params: params({
+                        query: term,
+                        page
+                    })
+                }
+            }
         })
     })
 })
 
-export const { usePopularQuery, useMovieByIdQuery, useNowPlayingQuery, useGenreQuery, useTopRatedQuery } = tmdbApi
+export const {
+    usePopularQuery,
+    useMovieByIdQuery,
+    useNowPlayingQuery,
+    useGenreQuery,
+    useTopRatedQuery,
+    useSearchMovieQuery
+} = tmdbApi

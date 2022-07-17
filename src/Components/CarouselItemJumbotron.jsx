@@ -25,14 +25,14 @@ const CarouselItemJumbotron = ({ carouselItem, currentIndex, index, innerRef, sh
             </div>
             <Link
                 to={carouselItem.link}
-                className={`flex h-full w-full absolute top-0 left-0 transition-opacity duration-300 opacity-100 bg-netflix-dark/75 z-10`}
+                className={`flex h-full w-full block absolute top-0 left-0 transition-opacity duration-300 opacity-100 bg-netflix-dark/75 z-10`}
             >
                 <div className="hidden w-1/2 h-full md:flex bg-netflix-blue pl-16 items-center">
                     <div className="flex flex-col gap-2">
                         <h3 className="text-2xl">{carouselItem.title}</h3>
                         <div className="flex flex-wrap gap-2 text-sm">
                             {
-                                carouselItem.genres.map(genre => (<Badge>{genre}</Badge>))
+                                carouselItem.genres.map(genre => (<Badge key={genre}>{genre}</Badge>))
                             }
                         </div>
                         <p>

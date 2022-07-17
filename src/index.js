@@ -15,6 +15,7 @@ import MoviesPage from './Pages/MoviesPage/MoviesPage';
 import MovieDetailPage from './Pages/MoviesPage/MovieDetailPage';
 import GuestComponent from './Components/GuestComponent';
 import Logout from './Pages/Logout/Logout';
+import SearchMoviePage from './Pages/MoviesPage/SearchMoviePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
             <Route path="/movie">
 
               <Route path="/movie" element={<MoviesPage />} />
+              <Route path="/movie/search" element={<SearchMoviePage />} />
               <Route path="/movie/:id" element={<ProtectedComponent><MovieDetailPage /></ProtectedComponent>} />
             </Route>
           </Route>

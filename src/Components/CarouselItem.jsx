@@ -11,7 +11,7 @@ const CarouselItem = ({ carouselItem, currentIndex, index, innerRef, showSelecte
         >
             <Link
                 to={carouselItem.link}
-                className="h-full w-96 block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0"
+                className="h-full w-screen md:w-96 block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0"
                 style={{ backgroundImage: `url(${carouselItem.imageUrl || ''})` }}
             >
                 <img

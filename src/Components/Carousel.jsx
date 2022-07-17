@@ -1,4 +1,5 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useRef, useState } from "react";
+import { isElementVisibleInScrollContainer } from "../utils/utilities";
 
 const Carousel = ({ carouselItems, ItemComponent, showSelected = false}) => {
 
@@ -10,6 +11,8 @@ const Carousel = ({ carouselItems, ItemComponent, showSelected = false}) => {
         prev[index] = createRef()
         return prev
     }, {})
+    
+    const carouselContainer = useRef()
 
     // console.log(itemRefs);
 
@@ -77,6 +80,7 @@ const Carousel = ({ carouselItems, ItemComponent, showSelected = false}) => {
                         </button>
                     </div>
                     <div
+                        ref={carouselContainer}
                         className="carousel-container relative flex gap-2 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0"
                     >
                         {carouselItems.map((resource, index) => {

@@ -6,6 +6,9 @@ const images = [
 ]
 
 const getImage = (id) => {
+    if (id.toString().substring(0, 4) === 'http') {
+        return id;
+    }
     return images[id - 1] || images[0]
 }
 

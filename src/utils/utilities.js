@@ -22,3 +22,10 @@ export const getOffset = (elm) => {
         top: rect.top + window.scrollY
     };
 }
+
+export const isElementVisibleInScrollContainer = function (ele, container) {
+    const { bottom, height, top } = ele.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+
+    return top <= containerRect.top ? containerRect.top - top <= height : bottom - containerRect.bottom <= height;
+};

@@ -1,35 +1,67 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Logo from "../assets/logo.svg"
-import { selectloggedInUser } from "../store/userStore";
+import { selectIsLoggedIn } from "../store/userStore";
 import SearchIcon from '../assets/icons/Search.svg'
 import NotificationBellIcon from '../assets/icons/NotificationBell.svg'
 import GiftBoxIcon from '../assets/icons/GiftBox.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import auth from "../authentication/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import userImage from "../data/userImage";
+import Input from "./Input";
 
 const Navbar = function () {
-    const loggedInUser = useSelector(selectloggedInUser)
-    const isLoggedIn = loggedInUser !== null
+    const [loggedInUser] = useAuthState(auth);
 
-    const [showDropdown, setShowDropdown] = useState(false)
-    const refDropDown = useRef()
+    const [showSearchBar, setShowSearchBar] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [searchText, setSearchText] = useState('');
+
+    const isLoggedIn = useSelector(selectIsLoggedIn);
+
+    const refDropDown = useRef();
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
 
-            if (refDropDown.current && !refDropDown.current.contains(event.target) && event.target.id !== 'userProfile') {
-                setShowDropdown(false);
+            if (refDropDown.current && !refDropDown.current.contains(event.target)) {
+                if (event.target.id !== 'userProfile') {
+                    setShowDropdown(false);
+                }
+                if (event.target.id !== 'search-bar' && event.target.id !== 'search-bar-trigger') {
+                    setShowSearchBar(false);
+                }
             }
         };
         document.addEventListener('click', handleClickOutside, true);
         return () => {
             document.removeEventListener('click', handleClickOutside, true);
         };
-    }, [showDropdown]);
+    }, [showDropdown, showSearchBar]);
+
+    useEffect(() => {
+        if (showSearchBar) {
+            document.getElementById('search-bar').focus()
+        }
+    }, [showSearchBar])
+
 
     const dropDownNavbarHandler = (e) => {
         setShowDropdown(!showDropdown)
     }
+
+    const handleSearch = () => {
+        navigate({
+            pathname: '/movie/search',
+            search: `?q=${searchText}`,
+        }, {
+            replace: true
+        });
+    }
+
     return (
         <>
             <div className="relative bg-netflix-dark">
@@ -44,7 +76,7 @@ const Navbar = function () {
                         <div className="mr-2 -my-2 md:hidden">
                             {
                                 isLoggedIn && (<div className="hover:cursor-pointer" onClick={dropDownNavbarHandler}>
-                                    <img id="userProfile" src={loggedInUser.image} className="w-8 h-8" alt="user profile" />
+                                    <img id="userProfile" src={userImage.getImage(loggedInUser.photoURL)} className="w-8 h-8" alt="user profile" />
                                 </div>)
                             }
                         </div>
@@ -57,15 +89,19 @@ const Navbar = function () {
                             </>
                         }
                         {
-                            isLoggedIn && <>
+                            <>
                                 <div className="text-white gap-4 hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                                    <img src={SearchIcon} alt="search icon" />
-                                    <span>{loggedInUser.username}</span>
-                                    <img src={GiftBoxIcon} alt="gift" />
-                                    <img src={NotificationBellIcon} alt="notifications" />
-                                    <div className="hover:cursor-pointer" onClick={dropDownNavbarHandler}>
-                                        <img id="userProfile" src={loggedInUser.image} className="w-8 h-8" alt="user profile" />
-                                    </div>
+                                    <button onClick={(e) => setShowSearchBar(!showSearchBar)}>
+                                        <img id="search-bar-trigger" src={SearchIcon} alt="search icon" />
+                                    </button>
+                                    {isLoggedIn && <>
+                                        <span>{loggedInUser.displayName}</span>
+                                        <img src={GiftBoxIcon} alt="gift" />
+                                        <img src={NotificationBellIcon} alt="notifications" />
+                                        <div className="hover:cursor-pointer" onClick={dropDownNavbarHandler}>
+                                            <img id="userProfile" src={userImage.getImage(loggedInUser.photoURL)} className="w-8 h-8" alt="user profile" />
+                                        </div>
+                                    </>}
                                 </div>
 
 
@@ -74,10 +110,29 @@ const Navbar = function () {
                         }
                     </div>
                 </div>
+
+                {
+                    showSearchBar && <div className={`z-10 w-screen flex justify-center`}>
+                        <div className="w-[calc(100vw-8rem)]">
+                            <Input
+                                size="medium"
+                                id="search-bar"
+                                placeholder="Search movie title.."
+                                onKeyPress={
+                                    (e) => e.key === 'Enter' && handleSearch()
+                                }
+                                value={searchText}
+                                onChange={
+                                    (e) => setSearchText(e.target.value)
+                                }
+                            ></Input>
+                        </div>
+                    </div>
+                }
                 {
                     isLoggedIn && (<div ref={refDropDown} className={`z-10 w-44 bg-netflix-dark border-t-2 border-netflix-blue rounded divide-y divide-gray-600 shadow block shadow-neutral-800 ${!showDropdown && 'hidden'}`} data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style={{ position: 'absolute', inset: '0px auto auto auto', right: '350px', margin: '0px', transform: 'translate3d(327px, 70px, 0px)' }}>
                         <div className="py-3 px-4 text-sm text-white">
-                            <div>{loggedInUser.username}</div>
+                            <div>{loggedInUser.displayName}</div>
                             <div className="font-medium truncate"></div>
                         </div>
                         {/* <ul className="py-1 text-sm text-white dark:text-white" aria-labelledby="dropdownInformationButton">

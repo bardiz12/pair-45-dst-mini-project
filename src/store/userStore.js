@@ -6,7 +6,7 @@ const loggedInUserFromLocalStorage = localStorage.getItem('logged-in-user') || '
 
 const initialState = {
     userList: JSON.parse(userListFromLocalStorage),
-    loggedInUser: JSON.parse(loggedInUserFromLocalStorage),
+    isLoggedIn: false,
     imageChoosen: 1,
 }
 
@@ -14,40 +14,45 @@ const storeUserToLocalStorage = (userListData) => {
     localStorage.setItem('user-lists', JSON.stringify(userListData));
 }
 
-const storeLoggedInUserToLocalStorage = (user) => {
-    localStorage.setItem('logged-in-user', JSON.stringify(user));
-}
 
 const userStore = createSlice({
     name: 'userStore',
     initialState,
     reducers: {
-        setLoggedInUser(state, action) {
-            const { user } = action.payload
-            state.loggedInUser = {
-                ...user,
-                image: userImage.getImage(user.image)
-            }
-            storeLoggedInUserToLocalStorage(state.loggedInUser)
+        loggedIn(state) {
+            state.isLoggedIn = true
         },
         addUser(state, action) {
-            state.userList.push(action.payload.user)
-            storeUserToLocalStorage(state.userList)
+            let userList = state.userList.filter(({ email }) => email !== action.payload.user.email)
+
+            const { displayName, email, photoURL } = action.payload.user;
+            userList.push({
+                displayName,
+                email,
+                photoURL
+            })
+
+            if (userList.length > 4) {
+                userList = userList.slice(1)
+            }
+
+            state.userList = userList
+            storeUserToLocalStorage(userList)
+
         },
         changeImageChoosen(state, action) {
             state.imageChoosen = action.payload.id
         },
-        logout(state) {
-            state.loggedInUser = null
-            storeLoggedInUserToLocalStorage(null)
+        notLoggedIn(state) {
+            state.isLoggedIn = false
         }
     }
 })
 
 export const selectUserList = (state) => state.userStore.userList
 export const selectImageChoosen = (state) => state.userStore.imageChoosen
-export const selectloggedInUser = (state) => state.userStore.loggedInUser
+export const selectIsLoggedIn = (state) => state.userStore.isLoggedIn
 // export const isUserValid = (state,) => state.userList.
-export const { addUser, changeImageChoosen, setLoggedInUser, logout } = userStore.actions
+export const { addUser, changeImageChoosen, loggedIn, notLoggedIn, logout } = userStore.actions
 
 export default userStore.reducer

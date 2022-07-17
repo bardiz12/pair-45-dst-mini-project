@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
-import { selectloggedInUser } from "../store/userStore";
+import { selectIsLoggedIn } from "../store/userStore";
 
 
 const GuestComponent = ({ children }) => {
-    const loggedInUser = useSelector(selectloggedInUser)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (loggedInUser) {
+        if (isLoggedIn) {
             navigate('/movie')
         }
-    }, [loggedInUser, navigate])
+    }, [isLoggedIn, navigate])
 
     return children
 }
