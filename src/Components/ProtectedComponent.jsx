@@ -12,13 +12,15 @@ const ProtectedComponent = ({ children }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        // Di sini kita akan membuat logic, apabila user tidak ada (null), maka akan kita
-        // "paksa" ke halaman login
+        if (isLoading) {
+            return;
+        }
+
         if (!loggedInUser) {
             navigate("/");
             return;
         }
-    }, [loggedInUser, navigate]);
+    }, [isLoading, loggedInUser, navigate]);
 
     if (isLoading) {
         return;
