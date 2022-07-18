@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Container from "../../Components/Container";
 import MovieItem from "../../Components/MovieItem";
 import { useSearchMovieQuery } from "../../services/tmdbApi";
@@ -7,11 +7,14 @@ import useTitle from "../../utils/useTitle";
 import { getTmdbImageUrl } from "../../utils/utilities";
 import noCover from "../../assets/noCover.jpg";
 import FullButton from "../../Components/Buttons/FullButton.jsx"
+
 const SearchMoviePage = () => {
 
     const navigate = useNavigate()
-    const queryParams = new URLSearchParams(window.location.search)
-    const term = queryParams.get("q")
+
+    const [searchParams] = useSearchParams()
+
+    const [term, setTerm] = useState(searchParams.get('q'))
 
     useTitle(`Search Movie : ${term}`)
     //state
@@ -29,6 +32,7 @@ const SearchMoviePage = () => {
 
     useEffect(() => {
         if (!isLoading && !error) {
+
             setMovies(movies => {
                 return [
                     ...movies,
@@ -38,6 +42,14 @@ const SearchMoviePage = () => {
         }
     }, [searchResult, error, isLoading])
 
+    useEffect(() => {
+        if (searchParams.get('q') !== term) {
+            setMovies([])
+            setPage(1)
+            setTerm(searchParams.get('q'))
+        }
+    }, [searchParams, term])
+
     const loadMore = () => {
         setPage(page + 1)
     }
@@ -46,9 +58,9 @@ const SearchMoviePage = () => {
         <>
             <div className="bg-netflix-dark text-white">
                 <Container>
-                    <p className="pt-2 pb-8">
+                    <div className="pt-2 pb-8">
                         <h2>Search Result for : "<span className="font-bold">{term}</span>"</h2>
-                    </p>
+                    </div>
                     <div className="w-full flex flex-wrap">
                         {
                             (!isLoading && !error) && movies.map(movie => {
