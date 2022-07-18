@@ -18,7 +18,7 @@ const LoginUserPage = () => {
     const dispatcher = useDispatch()
     const navigate = useNavigate()
 
-    dispatcher(changeImageChoosen({ id: (state || {}).image_id || 1 }))
+    dispatcher(changeImageChoosen({ id: (state || {}).photoURL || 1 }))
 
     const [loggedInUser, isLoading, error] = useAuthState(auth);
 
