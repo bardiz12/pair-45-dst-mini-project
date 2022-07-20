@@ -80,6 +80,9 @@ const Navbar = function () {
                                     <img id="userProfile" src={userImage.getImage(loggedInUser.photoURL)} className="w-8 h-8" alt="user profile" />
                                 </div>)
                             }
+                            <button onClick={(e) => setShowSearchBar(!showSearchBar)}>
+                                        <img id="search-bar-trigger" src={SearchIcon} alt="search icon" />
+                                    </button>
                         </div>
                         {
                             isLoggedIn && <>

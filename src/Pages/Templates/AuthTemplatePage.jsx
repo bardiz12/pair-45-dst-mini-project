@@ -22,7 +22,7 @@ const AuthTemplatePage = () => {
                         &nbsp;
                     </div>
                 </div>
-                <div className="w-full md:w-1/2 shadow-2xl">
+                <div className="w-full md:w-1/2 shadow-2xl  overflow-y-scroll">
                     <Outlet />
                 </div>
             </div>
