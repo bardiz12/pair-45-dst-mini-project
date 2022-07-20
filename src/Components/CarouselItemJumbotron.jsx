@@ -49,6 +49,14 @@ const CarouselItemJumbotron = ({ carouselItem, currentIndex, index, innerRef, sh
                             <div className="bg-gradient-to-r from-netflix-blue via-netflix-blue to-transparent h-full ">&nbsp;</div>
                         </div>
                     </div>
+                    <div className="block md:hidden absolute bg-netflix-blue opacity-75 w-full p-4  bottom-0">
+                        <h3 className="text-2xl">{carouselItem.title}</h3>
+                        <div className="flex flex-wrap gap-2 text-sm">
+                            {
+                                carouselItem.genres.map(genre => (<Badge key={genre}>{genre}</Badge>))
+                            }
+                        </div>
+                    </div>
 
 
                 </div>

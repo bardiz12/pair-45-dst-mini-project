@@ -60,6 +60,8 @@ const Navbar = function () {
         }, {
             replace: true
         });
+        setSearchText("");
+        setShowSearchBar(false);
     }
 
     return (

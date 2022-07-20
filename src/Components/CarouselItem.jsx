@@ -14,11 +14,11 @@ const CarouselItem = ({ carouselItem, currentIndex, index, innerRef, showSelecte
                 className="h-full w-screen md:w-96 block bg-origin-padding bg-left-top bg-cover bg-no-repeat z-0"
                 style={{ backgroundImage: `url(${carouselItem.imageUrl || ''})` }}
             >
-                <img
+                {/* <img
                     src={carouselItem.imageUrl || ''}
                     alt={carouselItem.title}
                     className="w-full hidden"
-                />
+                /> */}
             </Link>
             <Link
                 to={carouselItem.link}
