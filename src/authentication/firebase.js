@@ -70,7 +70,7 @@ export const loginFirebase = async (email, password) => {
         }
     } catch (err) {
         return {
-            success: true,
+            success: false,
             message: err.message,
             user: null
         }

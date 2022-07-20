@@ -75,14 +75,16 @@ const Navbar = function () {
                             </Link>
                         </div>
                         <div className="mr-2 -my-2 md:hidden">
-                            {
-                                isLoggedIn && (<div className="hover:cursor-pointer" onClick={dropDownNavbarHandler}>
-                                    <img id="userProfile" src={userImage.getImage(loggedInUser.photoURL)} className="w-8 h-8" alt="user profile" />
-                                </div>)
-                            }
-                            <button onClick={(e) => setShowSearchBar(!showSearchBar)}>
-                                        <img id="search-bar-trigger" src={SearchIcon} alt="search icon" />
-                                    </button>
+                            <div className="flex gap-4">
+                                <button onClick={(e) => setShowSearchBar(!showSearchBar)}>
+                                    <img id="search-bar-trigger" src={SearchIcon} alt="search icon" />
+                                </button>
+                                {
+                                    isLoggedIn && (<div className="hover:cursor-pointer" onClick={dropDownNavbarHandler}>
+                                        <img id="userProfile" src={userImage.getImage(loggedInUser.photoURL)} className="w-8 h-8" alt="user profile" />
+                                    </div>)
+                                }
+                            </div>
                         </div>
                         {
                             isLoggedIn && <>

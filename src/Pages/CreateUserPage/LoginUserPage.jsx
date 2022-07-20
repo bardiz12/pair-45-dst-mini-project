@@ -22,26 +22,24 @@ const LoginUserPage = () => {
 
     const [loggedInUser, isLoading, error] = useAuthState(auth);
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
         const payload = convertFormToObject(e.target)
 
         const { email, password } = payload
-        loginFirebase(email, password)
+        const { success, message } = await loginFirebase(email, password)
+        if (success === false) {
+            alert(message)
+        }
     }
 
     useEffect(
         () => {
-            // Nah di sini mungkin kita bisa modifikasi / menggunakan
-            // isLoading sebagai logic untuk menampilkan loading screen
-            // (pada pembelajaran ini loading screen tidak dibuat)
+            console.log(isLoading)
             if (isLoading) {
-                // Tampilkan loading screen (bila ada)
                 return;
             }
 
-            // Lalu apabila usernya ditemukan (ada / tidak null)
-            // Maka akan kita navigasikan ke halaman HomePage
             if (loggedInUser) {
                 dispatcher(addUser({
                     user: {
@@ -52,8 +50,8 @@ const LoginUserPage = () => {
                 }))
                 navigate("/movie");
             }
+
         },
-        // Sekarang dependency kita tergantung pada user dan isLoading dari useAuthState
         [loggedInUser, isLoading, navigate, dispatcher]
     );
 
@@ -67,15 +65,8 @@ const LoginUserPage = () => {
                         <form className='gap-4 w-full flex flex-col' onSubmit={onSubmitHandler} >
                             <Input type="email" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             <Input type="password" placeholder="Password" name="password" />
-                            {/* <div className="flex flex-wrap gap-2 justify-center">
-                                {
-                                    [1, 2, 3, 4].map(item => (
-                                        <img className={`w-16 h-16 ${item === selectedPicture ? 'opacity-100' : 'opacity-25 hover:opacity-50 hover:cursor-pointer'}`} src={userImage.getImage(item)} alt="profile selector" onClick={() => setSelectedPicture(item)} />
-                                    ))
-                                }
-                            </div> */}
-                            <RedButton size="medium" type="submit">
-                                <span>Login</span>
+                            <RedButton size="medium" type="submit" disabled={isLoading}>
+                                <span>{isLoading ? 'Checking...' : 'Login'}</span>
                             </RedButton>
                         </form>
                     </div>
