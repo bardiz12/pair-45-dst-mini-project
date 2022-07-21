@@ -14,13 +14,13 @@ const ProfilesPage = function () {
     useTitle('Pilih Profile')
     return (
         <>
-            <div className='flex flex-col w-full items-center justify-center gap-10 py-6 bg-netflix-dark text-white md:h-calc(100vh-85px)'>
+            <div className='flex flex-col w-full items-center justify-center gap-10 py-6 bg-netflix-dark text-white md:h-[calc(100vh-85px)]'>
                 <h1 className='text-5xl'>Who's Watching ?</h1>
                 <div className='flex flex-row md:flex-nowrap flex-wrap w-full justify-center md:gap-4 items-center'>
                     {
                         userList.map(user => {
-                            return <div className='md:w-auto w-1/2 justify-center items-center flex md:inline'>
-                                <UserBox key={user.email} user={{ ...user, photoURL: userImage.getImage(user.photoURL) }} onClick={(e) => navigate('auth/login', {
+                            return <div className='md:w-auto w-1/2 justify-center items-center flex md:inline' key={user.email}>
+                                <UserBox user={{ ...user, photoURL: userImage.getImage(user.photoURL) }} onClick={(e) => navigate('auth/login', {
                                     state: user
                                 })} />
                             </div>
