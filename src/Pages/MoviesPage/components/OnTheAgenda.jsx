@@ -2,15 +2,15 @@ import React from "react";
 import Carousel from "../../../Components/Carousel";
 import CarouselItem from "../../../Components/CarouselItem";
 import MovieSectionHeader from "../../../Components/MovieSectionHeader";
-import { useTopRatedQuery } from "../../../services/tmdbApi";
+import { usePopularQuery } from "../../../services/tmdbApi";
 import { getTmdbImageUrl } from "../../../utils/utilities";
 
-const TopRatedMovies = () => {
-  const { data, error, isLoading } = useTopRatedQuery();
+const OnTheAgenda = () => {
+  const { data, error, isLoading } = usePopularQuery();
 
   return (
     <>
-      <MovieSectionHeader title="Top Rated" />
+      <MovieSectionHeader title="On The Agenda" />
       {error && "Terjadi kesalahan saat mengambil data"}
 
       {isLoading && "Loading..."}
@@ -30,4 +30,4 @@ const TopRatedMovies = () => {
   );
 };
 
-export default TopRatedMovies;
+export default OnTheAgenda;

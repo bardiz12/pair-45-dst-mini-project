@@ -6,31 +6,28 @@ import { usePopularQuery } from "../../../services/tmdbApi";
 import { getTmdbImageUrl } from "../../../utils/utilities";
 
 const PopularMovies = () => {
-    const { data, error, isLoading } = usePopularQuery()
+  const { data, error, isLoading } = usePopularQuery();
 
-    return (
-        <>
-            <MovieSectionHeader title="Popular" />
-            {
-                error && "Terjadi kesalahan saat mengambil data"
-            }
+  return (
+    <>
+      <MovieSectionHeader title="Popular" />
+      {error && "Terjadi kesalahan saat mengambil data"}
 
-            {
-                isLoading && "Loading..."
-            }
-            {
-                !(error || isLoading) && (
-                    <div className="pt-4 pb-8">
-                        <Carousel carouselItems={data.results.map(item => ({
-                            link: `/movie/${item.id}`,
-                            imageUrl: getTmdbImageUrl(item.backdrop_path, '500'),
-                            title: item.title,
-                        }))} ItemComponent={CarouselItem} />
-                    </div>
-                )
-            }
-        </>
-    )
-}
+      {isLoading && "Loading..."}
+      {!(error || isLoading) && (
+        <div className="pt-4 pb-8">
+          <Carousel
+            carouselItems={data.results.map((item) => ({
+              link: `/movie/${item.id}`,
+              imageUrl: getTmdbImageUrl(item.backdrop_path, "500"),
+              title: item.title,
+            }))}
+            ItemComponent={CarouselItem}
+          />
+        </div>
+      )}
+    </>
+  );
+};
 
-export default PopularMovies
+export default PopularMovies;

@@ -5,12 +5,12 @@ import MovieSectionHeader from "../../../Components/MovieSectionHeader";
 import { useTopRatedQuery } from "../../../services/tmdbApi";
 import { getTmdbImageUrl } from "../../../utils/utilities";
 
-const TopRatedMovies = () => {
+const UserCollections = () => {
   const { data, error, isLoading } = useTopRatedQuery();
 
   return (
     <>
-      <MovieSectionHeader title="Top Rated" />
+      <MovieSectionHeader title="My Collections" />
       {error && "Terjadi kesalahan saat mengambil data"}
 
       {isLoading && "Loading..."}
@@ -30,4 +30,4 @@ const TopRatedMovies = () => {
   );
 };
 
-export default TopRatedMovies;
+export default UserCollections;
