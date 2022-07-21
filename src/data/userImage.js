@@ -5,7 +5,8 @@ const images = [
     require("../assets/profileImages/4.png")
 ]
 
-const getImage = (id) => {
+const getImage = (id = null) => {
+    id = id ?? 0
     if (id.toString().substring(0, 4) === 'http') {
         return id;
     }

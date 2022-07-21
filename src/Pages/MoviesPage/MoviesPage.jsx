@@ -8,20 +8,20 @@ import UserCollections from "./components/UserCollections.jsx";
 import setTitle from "../../utils/useTitle";
 
 const MoviesPage = () => {
-  setTitle("Movie List");
-  return (
-    <>
-      <div className="bg-netflix-dark text-white">
-        <Container>
-          <NowPlayingMovies />
-          <PopularMovies />
-          <TopRatedMovies />
-          <OnTheAgenda />
-          <UserCollections />
-        </Container>
-      </div>
-    </>
-  );
+    setTitle("Movie List");
+    return (
+        <>
+            <div className="bg-netflix-dark text-white">
+                <Container>
+                    <NowPlayingMovies />
+                    <PopularMovies />
+                    <TopRatedMovies />
+                    <OnTheAgenda />
+                    <UserCollections />
+                </Container>
+            </div>
+        </>
+    );
 };
 
 export default MoviesPage;
